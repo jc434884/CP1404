@@ -1,0 +1,114 @@
+BoxLayout:
+    id: mainBox
+
+    Popup:
+        id: popup_for_new_item
+        size_hint: (.8, .8)
+        title: "Stock UP"
+        on_parent:
+            if self.parent == mainBox: self.parent.remove_widget(self)
+        BoxLayout:
+            id: inputs
+            orientation: 'vertical'
+            Label:
+                text: 'Item Name: '
+                size_hint_y: None
+                height: '48dp'
+            TextInput:
+                id: new_item_name
+                value: ''
+                size_hint_y: None
+                height: '48dp'
+                multiline: False
+                write_tab: False
+            Label:
+                text: 'Item Description: '
+                size_hint_y: None
+                height: '48dp'
+            TextInput:
+                id: new_item_description
+                value: ''
+                size_hint_y: None
+                height: '48dp'
+                multiline: False
+                write_tab: False
+            Label:
+                text: 'Item Price: '
+                size_hint_y: None
+                height: '48dp'
+            TextInput:
+                id: new_item_price
+                value: ''
+                size_hint_y: None
+                height: '48dp'
+                multiline: False
+                write_tab: False
+            Button:
+                text: 'Save'
+                on_release: app.press_save_new_item(new_item_name.text, new_item_description.text, new_item_price.text)
+            Button:
+                text: 'Cancel'
+                on_release: app.press_cancel()
+            Label:
+                text: app.status_text
+
+    BoxLayout:
+
+        orientation: 'horizontal'
+        BoxLayout:
+            orientation: 'vertical'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 1
+                size_hint_y: 0.2
+                Button:
+                    id: list_items_button
+                    text: 'Show An Items'
+                    on_release: app.press_list_items()
+                Button:
+                    id: hire_item_button
+                    text: 'Hire An Item'
+                    on_release: app.press_hire_item()
+                Button:
+                    id: return_item_button
+                    text: 'Return An Item'
+                    on_release: app.press_return_item()
+                Button:
+                    id: new_item_button
+                    text: 'Stock UP'
+                    on_release: app.press_new_item()
+                Button:
+                    id: confirm_button
+                    text: 'Check-Out'
+                    on_release: app.press_confirm_item()
+                Button:
+                    id: clear_button
+                    text: 'Clear'
+                    on_release: app.press_clear()
+                Label:
+                    id: statusLabel
+                    size_hint_y: 2
+                    size_hint_x: 1
+                    rgba: 1,1,1,1
+                    text: app.status_text
+
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            GridLayout:
+                id: entriesBox
+                cols: 1
+                orientation: 'vertical'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1, 1)
+                Button:
+                    id: save_button
+                    size_hint_y: 1
+                    size_hint_x: 6
+                    text: 'Save Items'
+                    on_release: app.press_save()
+
